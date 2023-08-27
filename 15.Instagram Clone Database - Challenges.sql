@@ -106,6 +106,8 @@ GROUP BY users.id
 HAVING total_likes_by_user = (SELECT COUNT(*) FROM photos);
 
 
+
+
 /*We also have a problem with celebrities
 Find users who have never commented on a photo*/
 SELECT username,comment_text
@@ -120,6 +122,8 @@ SELECT COUNT(*) FROM
 	LEFT JOIN comments ON users.id = comments.user_id
 	GROUP BY users.id
 	HAVING comment_text IS NULL) AS total_number_of_users_without_comments;
+
+
 
 /*Mega Challenges
 Are we overrun with bots and celebrity accounts?
