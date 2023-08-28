@@ -1,4 +1,4 @@
-# Instagram Clone Database
+## Instagram Clone Database
 
 Welcome to the Instagram Clone Database repository! This project is a SQL-based representation of a simplified Instagram clone, showcasing the database schema and tables required for core features of a social media platform.
 
@@ -18,23 +18,62 @@ This project aims to demonstrate the database structure needed for creating an I
 
 The database schema consists of several interconnected tables that enable different features of the platform.
 
-![Database Schema](path/to/your/schema-image.png)
-
+![Database Schema](https://github.com/VishalAnna/Instagram-Clone-Project/assets/95202004/320c680a-b289-43c9-a1d0-07d169c2bdc0)
 ## Tables
 
-1. **Users**: Store user information, including their username and registration date.
 
-2. **Photos**: Keep track of user-uploaded photos with associated image URLs.
+## Table 1: users
+- Columns:
+  - `id`: INT (Primary Key, Auto Increment)
+  - `username`: VARCHAR(255), NOT NULL
+  - `created_at`: TIMESTAMP, Default: NOW()
+- Description: This table stores information about users who are registered on the platform. Each user has a unique ID, a username, and a timestamp indicating when they joined.
 
-3. **Comments**: Store user comments on specific photos.
+## Table 2: photos
+- Columns:
+  - `id`: INT (Primary Key, Auto Increment)
+  - `image_url`: VARCHAR(355), NOT NULL
+  - `user_id`: INT, NOT NULL (Foreign Key referencing users.id)
+  - `created_at`: TIMESTAMP, Default: NOW()
+- Description: The photos table holds details about uploaded photos. It includes a unique photo ID, the URL to the image, the user ID of the uploader, and a timestamp indicating when the photo was uploaded.
 
-4. **Likes**: Record user likes on photos.
+## Table 3: comments
+- Columns:
+  - `id`: INT (Primary Key, Auto Increment)
+  - `comment_text`: VARCHAR(255), NOT NULL
+  - `user_id`: INT, NOT NULL (Foreign Key referencing users.id)
+  - `photo_id`: INT, NOT NULL (Foreign Key referencing photos.id)
+  - `created_at`: TIMESTAMP, Default: NOW()
+- Description: This table stores comments made on photos. It contains a unique comment ID, the comment text, the user ID of the commenter, the photo ID on which the comment was made, and a timestamp for the comment creation.
 
-5. **Follows**: Maintain the follower-followee relationship between users.
+## Table 4: likes
+- Columns:
+  - `user_id`: INT, NOT NULL (Foreign Key referencing users.id)
+  - `photo_id`: INT, NOT NULL (Foreign Key referencing photos.id)
+  - `created_at`: TIMESTAMP, Default: NOW()
+- Description: The likes table tracks the likes given to photos. It uses a composite primary key (user_id, photo_id) to prevent duplicate likes from the same user on the same photo.
 
-6. **Tags**: Store unique tags that can be applied to photos.
+## Table 5: follows
+- Columns:
+  - `follower_id`: INT, NOT NULL (Foreign Key referencing users.id)
+  - `followee_id`: INT, NOT NULL (Foreign Key referencing users.id)
+  - `created_at`: TIMESTAMP, Default: NOW()
+- Description: This table maintains the relationship between users who follow each other. It uses a composite primary key (follower_id, followee_id) to prevent duplicate follow entries.
 
-7. **Photo_Tags**: Junction table linking photos to their associated tags.
+## Table 6: tags
+- Columns:
+  - `id`: INT (Primary Key, Auto Increment)
+  - `tag_name`: VARCHAR(255), UNIQUE, NOT NULL
+  - `created_at`: TIMESTAMP, Default: NOW()
+- Description: The tags table stores unique tag names that can be associated with photos. Each tag has a unique ID and a timestamp indicating when it was created.
+
+## Table 7: photo_tags
+- Columns:
+  - `photo_id`: INT, NOT NULL (Foreign Key referencing photos.id)
+  - `tag_id`: INT, NOT NULL (Foreign Key referencing tags.id)
+- Description: This junction table establishes a many-to-many relationship between photos and tags. It enables photos to have multiple tags and tags to be associated with multiple photos. The composite primary key (photo_id, tag_id) ensures uniqueness.
+
+
 
 ## Queries
 
