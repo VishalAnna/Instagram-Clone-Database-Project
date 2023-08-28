@@ -77,8 +77,9 @@ The database schema consists of several interconnected tables that enable differ
 
 ## Queries
 
-The project SQL files include sample queries to interact with the database. These queries include retrieving user posts, adding comments, getting likes, and more.
+The project SQL files include sample queries to interact with the database. These queries include retrieving user posts, adding comments, getting likes, and more
 
+[Here are some SQL queries and there answers based on the above schema](https://github.com/VishalAnna/Instagram-Clone-Project/blob/6d0271f2285bec0af53e2323d9c241c6695d319e/15.Instagram%20Clone%20Database%20-%20Challenges.sql)
 
 
 
