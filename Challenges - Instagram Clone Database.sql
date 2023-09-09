@@ -60,7 +60,7 @@ LIMIT 1;
 /*Our Investors want to know...
 How many times does the average user post?*/
 /*total number of photos/total number of users*/
-SELECT ROUND((SELECT COUNT(*)FROM photos)/(SELECT COUNT(*) FROM users),2);
+SELECT ROUND((SELECT COUNT(*)FROM photos) / (SELECT COUNT(*) FROM users), 2);
 
 
 /*user ranking by postings higher to lower*/
