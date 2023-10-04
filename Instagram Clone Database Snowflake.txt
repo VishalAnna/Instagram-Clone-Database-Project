@@ -1,0 +1,62 @@
+/*Users*/
+CREATE OR REPLACE TABLE users(
+	id INT UNIQUE PRIMARY KEY,
+	username VARCHAR(255) NOT NULL,
+	created_at DATE  
+);
+
+/*Photos*/
+CREATE OR REPLACE TABLE photos(
+	id INT  PRIMARY KEY,
+	image_url VARCHAR(355) NOT NULL,
+	user_id INT NOT NULL,
+	created_at DATE ,
+	FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+/*Comments*/
+CREATE OR REPLACE TABLE comments(
+	id INT  PRIMARY KEY,
+	comment_text VARCHAR(255) NOT NULL,
+	user_id INT NOT NULL,
+	photo_id INT NOT NULL,
+	created_at DATE ,
+	FOREIGN KEY(user_id) REFERENCES users(id),
+	FOREIGN KEY(photo_id) REFERENCES photos(id)
+);
+
+/*Likes*/
+CREATE OR REPLACE TABLE likes(
+	user_id INT NOT NULL,
+	photo_id INT NOT NULL,
+	created_at DATE ,
+	FOREIGN KEY(user_id) REFERENCES users(id),
+	FOREIGN KEY(photo_id) REFERENCES photos(id),
+	PRIMARY KEY(user_id,photo_id)
+);
+
+/*follows*/
+CREATE OR REPLACE TABLE follows(
+	follower_id INT NOT NULL,
+	followee_id INT NOT NULL,
+	created_at DATE ,
+	FOREIGN KEY (follower_id) REFERENCES users(id),
+	FOREIGN KEY (followee_id) REFERENCES users(id),
+	PRIMARY KEY(follower_id,followee_id)
+);
+
+/*Tags*/
+CREATE OR REPLACE TABLE tags(
+	id INTEGER  PRIMARY KEY,
+	tag_name VARCHAR(255) UNIQUE NOT NULL,
+	created_at DATE 
+);
+
+/*junction table: Photos - Tags*/
+CREATE OR REPLACE TABLE photo_tags(
+	photo_id INT NOT NULL,
+	tag_id INT NOT NULL,
+	FOREIGN KEY(photo_id) REFERENCES photos(id),
+	FOREIGN KEY(tag_id) REFERENCES tags(id),
+	PRIMARY KEY(photo_id,tag_id)
+);
